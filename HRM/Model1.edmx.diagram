@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ed5931a4efa849b2a40dd509a96b746d" Name="Diagram1" ZoomLevel="142">
+        <EntityTypeShape EntityType="user222_dbModel.employees" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="user222_dbModel.Kompania" Width="1.5" PointX="3" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="user222_dbModel.rating" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="user222_dbModel.resume" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="user222_dbModel.Role" Width="1.5" PointX="3" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="user222_dbModel.task" Width="1.5" PointX="3" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="user222_dbModel.vacancy" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <AssociationConnector Association="user222_dbModel.FK_employees_Kompania" ManuallyRouted="false" />
+        <AssociationConnector Association="user222_dbModel.FK_employees_rating" ManuallyRouted="false" />
+        <AssociationConnector Association="user222_dbModel.FK_employees_resume" ManuallyRouted="false" />
+        <AssociationConnector Association="user222_dbModel.FK_employees_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="user222_dbModel.FK_employees_task" ManuallyRouted="false" />
+        <AssociationConnector Association="user222_dbModel.FK_Kompania_vacancy" ManuallyRouted="false" />
+        <AssociationConnector Association="user222_dbModel.FK_rating_employees" />
+        <AssociationConnector Association="user222_dbModel.FK_resume_employees" />
+        <AssociationConnector Association="user222_dbModel.FK_task_employees" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

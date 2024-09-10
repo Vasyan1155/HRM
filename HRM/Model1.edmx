@@ -1,0 +1,567 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище user222_dbModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="employees">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="resume" Type="int" />
+          <Property Name="vacancy" Type="int" />
+          <Property Name="task" Type="int" />
+          <Property Name="rating" Type="int" />
+          <Property Name="compania" Type="int" />
+          <Property Name="login" Type="varchar" MaxLength="50" />
+          <Property Name="password" Type="varchar" MaxLength="50" />
+          <Property Name="id_role" Type="int" />
+        </EntityType>
+        <EntityType Name="Kompania">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="id_vacancy" Type="int" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "user222_db.dbo.rating" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="rating">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="me" Type="int" />
+          <Property Name="manager" Type="int" />
+          <Property Name="sum" Type="int" />
+          <Property Name="id_sotrud" Type="int" />
+        </EntityType>
+        <EntityType Name="resume">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="f" Type="varchar" MaxLength="50" />
+          <Property Name="i" Type="varchar" MaxLength="50" />
+          <Property Name="o" Type="varchar" MaxLength="50" />
+          <Property Name="mail" Type="varchar" MaxLength="50" />
+          <Property Name="vozract" Type="int" />
+          <Property Name="education" Type="varchar" MaxLength="50" />
+          <Property Name="opisanie" Type="text" />
+          <Property Name="id_sotrud" Type="int" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="id_role" />
+          </Key>
+          <Property Name="id_role" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="text" />
+          <Property Name="salary" Type="int" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "user222_db.dbo.task" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="task">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="task" Type="varchar" MaxLength="50" />
+          <Property Name="start_time" Type="date" />
+          <Property Name="end_time" Type="date" />
+          <Property Name="accomplishment" Type="varchar" MaxLength="50" />
+          <Property Name="id_sotrud" Type="int" />
+        </EntityType>
+        <EntityType Name="vacancy">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_vacancy" Type="varchar" MaxLength="50" />
+          <Property Name="zp" Type="int" />
+          <Property Name="opicanie_vacancy" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_employees_Kompania">
+          <End Role="Kompania" Type="Self.Kompania" Multiplicity="0..1" />
+          <End Role="employees" Type="Self.employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kompania">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="employees">
+              <PropertyRef Name="compania" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_employees_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="employees" Type="Self.employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="id_role" />
+            </Principal>
+            <Dependent Role="employees">
+              <PropertyRef Name="id_role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kompania_vacancy">
+          <End Role="vacancy" Type="Self.vacancy" Multiplicity="0..1" />
+          <End Role="Kompania" Type="Self.Kompania" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vacancy">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Kompania">
+              <PropertyRef Name="id_vacancy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rating_employees">
+          <End Role="employees" Type="Self.employees" Multiplicity="0..1" />
+          <End Role="rating" Type="Self.rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rating">
+              <PropertyRef Name="id_sotrud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_resume_employees">
+          <End Role="employees" Type="Self.employees" Multiplicity="0..1" />
+          <End Role="resume" Type="Self.resume" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="resume">
+              <PropertyRef Name="id_sotrud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_task_employees">
+          <End Role="employees" Type="Self.employees" Multiplicity="0..1" />
+          <End Role="task" Type="Self.task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="task">
+              <PropertyRef Name="id_sotrud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище user222_dbModelContainer">
+          <EntitySet Name="employees" EntityType="Self.employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kompania" EntityType="Self.Kompania" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="resume" EntityType="Self.resume" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vacancy" EntityType="Self.vacancy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rating" EntityType="Self.rating" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [rating].[id] AS [id], 
+    [rating].[me] AS [me], 
+    [rating].[manager] AS [manager], 
+    [rating].[sum] AS [sum], 
+    [rating].[id_sotrud] AS [id_sotrud]
+    FROM [dbo].[rating] AS [rating]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="task" EntityType="Self.task" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [task].[id] AS [id], 
+    [task].[task] AS [task], 
+    [task].[start_time] AS [start_time], 
+    [task].[end_time] AS [end_time], 
+    [task].[accomplishment] AS [accomplishment], 
+    [task].[id_sotrud] AS [id_sotrud]
+    FROM [dbo].[task] AS [task]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_employees_Kompania" Association="Self.FK_employees_Kompania">
+            <End Role="Kompania" EntitySet="Kompania" />
+            <End Role="employees" EntitySet="employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_employees_Role" Association="Self.FK_employees_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="employees" EntitySet="employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kompania_vacancy" Association="Self.FK_Kompania_vacancy">
+            <End Role="vacancy" EntitySet="vacancy" />
+            <End Role="Kompania" EntitySet="Kompania" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rating_employees" Association="Self.FK_rating_employees">
+            <End Role="employees" EntitySet="employees" />
+            <End Role="rating" EntitySet="rating" />
+          </AssociationSet>
+          <AssociationSet Name="FK_resume_employees" Association="Self.FK_resume_employees">
+            <End Role="employees" EntitySet="employees" />
+            <End Role="resume" EntitySet="resume" />
+          </AssociationSet>
+          <AssociationSet Name="FK_task_employees" Association="Self.FK_task_employees">
+            <End Role="employees" EntitySet="employees" />
+            <End Role="task" EntitySet="task" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="user222_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="employees">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="resume" Type="Int32" />
+          <Property Name="vacancy" Type="Int32" />
+          <Property Name="task" Type="Int32" />
+          <Property Name="rating" Type="Int32" />
+          <Property Name="compania" Type="Int32" />
+          <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id_role" Type="Int32" />
+          <NavigationProperty Name="Kompania" Relationship="Self.FK_employees_Kompania" FromRole="employees" ToRole="Kompania" />
+          <NavigationProperty Name="rating1" Relationship="Self.FK_employees_rating" FromRole="employees" ToRole="rating" />
+          <NavigationProperty Name="resume1" Relationship="Self.FK_employees_resume" FromRole="employees" ToRole="resume" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_employees_Role" FromRole="employees" ToRole="Role" />
+          <NavigationProperty Name="task1" Relationship="Self.FK_employees_task" FromRole="employees" ToRole="task" />
+          <NavigationProperty Name="rating11" Relationship="user222_dbModel.FK_rating_employees" FromRole="employees" ToRole="rating" />
+          <NavigationProperty Name="resume11" Relationship="user222_dbModel.FK_resume_employees" FromRole="employees" ToRole="resume" />
+          <NavigationProperty Name="task11" Relationship="user222_dbModel.FK_task_employees" FromRole="employees" ToRole="task" />
+        </EntityType>
+        <EntityType Name="Kompania">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id_vacancy" Type="Int32" />
+          <NavigationProperty Name="employees" Relationship="Self.FK_employees_Kompania" FromRole="Kompania" ToRole="employees" />
+          <NavigationProperty Name="vacancy" Relationship="Self.FK_Kompania_vacancy" FromRole="Kompania" ToRole="vacancy" />
+        </EntityType>
+        <EntityType Name="rating">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="me" Type="Int32" />
+          <Property Name="manager" Type="Int32" />
+          <Property Name="sum" Type="Int32" />
+          <NavigationProperty Name="employees" Relationship="Self.FK_employees_rating" FromRole="rating" ToRole="employees" />
+          <Property Name="id_sotrud" Type="Int32" />
+          <NavigationProperty Name="employees1" Relationship="user222_dbModel.FK_rating_employees" FromRole="rating" ToRole="employees" />
+        </EntityType>
+        <EntityType Name="resume">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="f" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="i" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="o" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="vozract" Type="Int32" />
+          <Property Name="education" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="opisanie" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="employees" Relationship="Self.FK_employees_resume" FromRole="resume" ToRole="employees" />
+          <Property Name="id_sotrud" Type="Int32" />
+          <NavigationProperty Name="employees1" Relationship="user222_dbModel.FK_resume_employees" FromRole="resume" ToRole="employees" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="id_role" />
+          </Key>
+          <Property Name="id_role" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="salary" Type="Int32" />
+          <NavigationProperty Name="employees" Relationship="Self.FK_employees_Role" FromRole="Role" ToRole="employees" />
+        </EntityType>
+        <EntityType Name="task">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="task1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="start_time" Type="DateTime" Precision="0" />
+          <Property Name="end_time" Type="DateTime" Precision="0" />
+          <Property Name="accomplishment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="employees" Relationship="Self.FK_employees_task" FromRole="task" ToRole="employees" />
+          <Property Name="id_sotrud" Type="Int32" />
+          <NavigationProperty Name="employees1" Relationship="user222_dbModel.FK_task_employees" FromRole="task" ToRole="employees" />
+        </EntityType>
+        <EntityType Name="vacancy">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name_vacancy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="zp" Type="Int32" />
+          <Property Name="opicanie_vacancy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Kompania" Relationship="Self.FK_Kompania_vacancy" FromRole="vacancy" ToRole="Kompania" />
+        </EntityType>
+        <Association Name="FK_employees_Kompania">
+          <End Role="Kompania" Type="Self.Kompania" Multiplicity="0..1" />
+          <End Role="employees" Type="Self.employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kompania">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="employees">
+              <PropertyRef Name="compania" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_employees_rating">
+          <End Role="rating" Type="Self.rating" Multiplicity="0..1" />
+          <End Role="employees" Type="Self.employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rating">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="employees">
+              <PropertyRef Name="rating" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_employees_resume">
+          <End Role="resume" Type="Self.resume" Multiplicity="0..1" />
+          <End Role="employees" Type="Self.employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="resume">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="employees">
+              <PropertyRef Name="resume" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_employees_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="employees" Type="Self.employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="id_role" />
+            </Principal>
+            <Dependent Role="employees">
+              <PropertyRef Name="id_role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_employees_task">
+          <End Role="task" Type="Self.task" Multiplicity="0..1" />
+          <End Role="employees" Type="Self.employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="task">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="employees">
+              <PropertyRef Name="task" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kompania_vacancy">
+          <End Role="vacancy" Type="Self.vacancy" Multiplicity="0..1" />
+          <End Role="Kompania" Type="Self.Kompania" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vacancy">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Kompania">
+              <PropertyRef Name="id_vacancy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="employees" EntityType="Self.employees" />
+          <EntitySet Name="Kompania" EntityType="Self.Kompania" />
+          <EntitySet Name="rating" EntityType="Self.rating" />
+          <EntitySet Name="resume" EntityType="Self.resume" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="task" EntityType="Self.task" />
+          <EntitySet Name="vacancy" EntityType="Self.vacancy" />
+          <AssociationSet Name="FK_employees_Kompania" Association="Self.FK_employees_Kompania">
+            <End Role="Kompania" EntitySet="Kompania" />
+            <End Role="employees" EntitySet="employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_employees_rating" Association="Self.FK_employees_rating">
+            <End Role="rating" EntitySet="rating" />
+            <End Role="employees" EntitySet="employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_employees_resume" Association="Self.FK_employees_resume">
+            <End Role="resume" EntitySet="resume" />
+            <End Role="employees" EntitySet="employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_employees_Role" Association="Self.FK_employees_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="employees" EntitySet="employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_employees_task" Association="Self.FK_employees_task">
+            <End Role="task" EntitySet="task" />
+            <End Role="employees" EntitySet="employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kompania_vacancy" Association="Self.FK_Kompania_vacancy">
+            <End Role="vacancy" EntitySet="vacancy" />
+            <End Role="Kompania" EntitySet="Kompania" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rating_employees" Association="user222_dbModel.FK_rating_employees">
+            <End Role="employees" EntitySet="employees" />
+            <End Role="rating" EntitySet="rating" />
+          </AssociationSet>
+          <AssociationSet Name="FK_resume_employees" Association="user222_dbModel.FK_resume_employees">
+            <End Role="employees" EntitySet="employees" />
+            <End Role="resume" EntitySet="resume" />
+          </AssociationSet>
+          <AssociationSet Name="FK_task_employees" Association="user222_dbModel.FK_task_employees">
+            <End Role="employees" EntitySet="employees" />
+            <End Role="task" EntitySet="task" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_rating_employees">
+          <End Type="user222_dbModel.employees" Role="employees" Multiplicity="0..1" />
+          <End Type="user222_dbModel.rating" Role="rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rating">
+              <PropertyRef Name="id_sotrud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_resume_employees">
+          <End Type="user222_dbModel.employees" Role="employees" Multiplicity="0..1" />
+          <End Type="user222_dbModel.resume" Role="resume" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="resume">
+              <PropertyRef Name="id_sotrud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_task_employees">
+          <End Type="user222_dbModel.employees" Role="employees" Multiplicity="0..1" />
+          <End Type="user222_dbModel.task" Role="task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="task">
+              <PropertyRef Name="id_sotrud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище user222_dbModelContainer" CdmEntityContainer="DB">
+          <EntitySetMapping Name="employees">
+            <EntityTypeMapping TypeName="user222_dbModel.employees">
+              <MappingFragment StoreEntitySet="employees">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="resume" ColumnName="resume" />
+                <ScalarProperty Name="vacancy" ColumnName="vacancy" />
+                <ScalarProperty Name="task" ColumnName="task" />
+                <ScalarProperty Name="rating" ColumnName="rating" />
+                <ScalarProperty Name="compania" ColumnName="compania" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="id_role" ColumnName="id_role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kompania">
+            <EntityTypeMapping TypeName="user222_dbModel.Kompania">
+              <MappingFragment StoreEntitySet="Kompania">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id_vacancy" ColumnName="id_vacancy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rating">
+            <EntityTypeMapping TypeName="user222_dbModel.rating">
+              <MappingFragment StoreEntitySet="rating">
+                <ScalarProperty Name="id_sotrud" ColumnName="id_sotrud" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="me" ColumnName="me" />
+                <ScalarProperty Name="manager" ColumnName="manager" />
+                <ScalarProperty Name="sum" ColumnName="sum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="resume">
+            <EntityTypeMapping TypeName="user222_dbModel.resume">
+              <MappingFragment StoreEntitySet="resume">
+                <ScalarProperty Name="id_sotrud" ColumnName="id_sotrud" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="f" ColumnName="f" />
+                <ScalarProperty Name="i" ColumnName="i" />
+                <ScalarProperty Name="o" ColumnName="o" />
+                <ScalarProperty Name="mail" ColumnName="mail" />
+                <ScalarProperty Name="vozract" ColumnName="vozract" />
+                <ScalarProperty Name="education" ColumnName="education" />
+                <ScalarProperty Name="opisanie" ColumnName="opisanie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="user222_dbModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="id_role" ColumnName="id_role" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="salary" ColumnName="salary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="task">
+            <EntityTypeMapping TypeName="user222_dbModel.task">
+              <MappingFragment StoreEntitySet="task">
+                <ScalarProperty Name="id_sotrud" ColumnName="id_sotrud" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="task1" ColumnName="task" />
+                <ScalarProperty Name="start_time" ColumnName="start_time" />
+                <ScalarProperty Name="end_time" ColumnName="end_time" />
+                <ScalarProperty Name="accomplishment" ColumnName="accomplishment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vacancy">
+            <EntityTypeMapping TypeName="user222_dbModel.vacancy">
+              <MappingFragment StoreEntitySet="vacancy">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name_vacancy" ColumnName="name_vacancy" />
+                <ScalarProperty Name="zp" ColumnName="zp" />
+                <ScalarProperty Name="opicanie_vacancy" ColumnName="opicanie_vacancy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

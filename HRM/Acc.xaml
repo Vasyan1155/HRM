@@ -1,0 +1,76 @@
+﻿<Window x:Class="HRM.Acc"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HRM"
+        mc:Ignorable="d"
+        Title="Acc" Height="450" Width="800">
+    <Grid>
+        <TabControl TabStripPlacement="Left"  >
+            <TabItem Height="50" FontSize="24" Header="Задачи" Background="#C7F5B7" >
+                <StackPanel>
+                    <Rectangle Margin="20" Width="600" Height="50" MaxHeight="50" Grid.Row="0" VerticalAlignment="Top"  HorizontalAlignment="Left" Fill="LightGray"/>
+                    <TextBlock Grid.Row ="1" x:Name="Zadachi" HorizontalAlignment="Center" Foreground="Black" FontWeight="Bold" FontSize="16">0</TextBlock>
+                    <DataGrid></DataGrid>
+                </StackPanel>
+
+
+
+            </TabItem>
+
+            <TabItem Height="50" FontSize="24" Header="Рейтинг" Background="#C7F5B7" Margin="-2,0,0,0" VerticalAlignment="Top">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock HorizontalAlignment="Left"> Моя оценка</TextBlock>
+
+                    <TextBlock HorizontalAlignment="Center" > Оценка менеджера</TextBlock>
+                    <TextBlock></TextBlock>
+                    <TextBlock> общая</TextBlock>
+                </StackPanel>
+            </TabItem>
+            <TabItem Height="50" FontSize="24" Header="Резюме" Background="#C7F5B7" Initialized="TabItem_Initialized" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" >Резюме</TextBlock>
+                    <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" >Фамилия</TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" >Имя</TextBlock>
+                    <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" >Отчество</TextBlock>
+                    <TextBlock Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" >Почта</TextBlock>
+                    <TextBlock Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" >Возраст</TextBlock>
+                    <TextBlock Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" >Образование</TextBlock>
+                    <TextBlock Grid.Row="7" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" >Коментарий</TextBlock>
+
+                    <TextBox Grid.Row="1" Grid.Column="1" Height="30" MaxHeight="30" VerticalAlignment="Center" Name="f" Text="{Binding f}" FontSize="14"></TextBox>
+                    <TextBox Grid.Row="2" Grid.Column="1" Height="30" MaxHeight="30" VerticalAlignment="Center" Name="i" Text="{Binding i}" FontSize="14"></TextBox>
+                    <TextBox Grid.Row="3" Grid.Column="1" Height="30" MaxHeight="30" VerticalAlignment="Center" Name="o" Text="{Binding o}" FontSize="14"></TextBox>
+                    <TextBox Grid.Row="4" Grid.Column="1" Height="30" MaxHeight="30" VerticalAlignment="Center" Name="mail" Text="{Binding mail}" FontSize="14"></TextBox>
+                    <TextBox Grid.Row="5" Grid.Column="1" Height="30" MaxHeight="30" VerticalAlignment="Center" Name="vozract" Text="{Binding vozract}" FontSize="14"></TextBox>
+                    <TextBox Grid.Row="6" Grid.Column="1" Height="30" MaxHeight="30" VerticalAlignment="Center" Name="education" Text="{Binding education}" FontSize="14"></TextBox>
+                    <TextBox Grid.Row="7" Grid.Column="1" Grid.RowSpan="2"  VerticalAlignment="Center" Name="opisanie" FontSize="14" Height="66" Text="{Binding opisanie}"></TextBox>
+                    <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2" Grid.Row="9">
+                        <Button Margin="0 0 20 0" Width="200" Click="Sohr_Click" >Сохранить</Button>
+                        <Button Margin="0 0 20 0" Width="200" Click="Delete_Click1" >Удалить</Button>
+                        <Button Width="200" Click="Button_Click" >Добавить</Button>
+                    </StackPanel>
+                </Grid>
+
+
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
