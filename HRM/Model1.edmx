@@ -27,16 +27,15 @@
           <Property Name="name" Type="varchar" MaxLength="50" />
           <Property Name="id_vacancy" Type="int" />
         </EntityType>
-        <!--Ошибки, обнаруженные при создании:
-предупреждение 6002: В таблице или представлении "user222_db.dbo.rating" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
         <EntityType Name="rating">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="me" Type="int" />
-          <Property Name="manager" Type="int" />
-          <Property Name="sum" Type="int" />
+          <Property Name="srok_vipolnenie_zadach" Type="varchar" MaxLength="50" />
+          <Property Name="kachestvo_rabot" Type="varchar" MaxLength="50" />
+          <Property Name="zaverchenieZadach" Type="varchar" MaxLength="50" />
+          <Property Name="itog" Type="varchar" MaxLength="50" />
           <Property Name="id_sotrud" Type="int" />
         </EntityType>
         <EntityType Name="resume">
@@ -44,7 +43,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="f" Type="varchar" MaxLength="50" />
+          <Property Name="f" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="i" Type="varchar" MaxLength="50" />
           <Property Name="o" Type="varchar" MaxLength="50" />
           <Property Name="mail" Type="varchar" MaxLength="50" />
@@ -61,8 +60,6 @@
           <Property Name="Name" Type="text" />
           <Property Name="salary" Type="int" />
         </EntityType>
-        <!--Ошибки, обнаруженные при создании:
-предупреждение 6002: В таблице или представлении "user222_db.dbo.task" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
         <EntityType Name="task">
           <Key>
             <PropertyRef Name="id" />
@@ -158,28 +155,11 @@
         <EntityContainer Name="Хранилище user222_dbModelContainer">
           <EntitySet Name="employees" EntityType="Self.employees" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Kompania" EntityType="Self.Kompania" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rating" EntityType="Self.rating" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="resume" EntityType="Self.resume" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="task" EntityType="Self.task" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="vacancy" EntityType="Self.vacancy" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="rating" EntityType="Self.rating" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [rating].[id] AS [id], 
-    [rating].[me] AS [me], 
-    [rating].[manager] AS [manager], 
-    [rating].[sum] AS [sum], 
-    [rating].[id_sotrud] AS [id_sotrud]
-    FROM [dbo].[rating] AS [rating]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="task" EntityType="Self.task" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [task].[id] AS [id], 
-    [task].[task] AS [task], 
-    [task].[start_time] AS [start_time], 
-    [task].[end_time] AS [end_time], 
-    [task].[accomplishment] AS [accomplishment], 
-    [task].[id_sotrud] AS [id_sotrud]
-    FROM [dbo].[task] AS [task]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_employees_Kompania" Association="Self.FK_employees_Kompania">
             <End Role="Kompania" EntitySet="Kompania" />
             <End Role="employees" EntitySet="employees" />
@@ -246,19 +226,20 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="me" Type="Int32" />
-          <Property Name="manager" Type="Int32" />
-          <Property Name="sum" Type="Int32" />
           <NavigationProperty Name="employees" Relationship="Self.FK_employees_rating" FromRole="rating" ToRole="employees" />
           <Property Name="id_sotrud" Type="Int32" />
           <NavigationProperty Name="employees1" Relationship="user222_dbModel.FK_rating_employees" FromRole="rating" ToRole="employees" />
+          <Property Name="srok_vipolnenie_zadach" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="kachestvo_rabot" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="zaverchenieZadach" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="itog" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="resume">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="f" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="f" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="i" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="o" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -487,12 +468,13 @@
           <EntitySetMapping Name="rating">
             <EntityTypeMapping TypeName="user222_dbModel.rating">
               <MappingFragment StoreEntitySet="rating">
+                <ScalarProperty Name="itog" ColumnName="itog" />
+                <ScalarProperty Name="zaverchenieZadach" ColumnName="zaverchenieZadach" />
+                <ScalarProperty Name="kachestvo_rabot" ColumnName="kachestvo_rabot" />
+                <ScalarProperty Name="srok_vipolnenie_zadach" ColumnName="srok_vipolnenie_zadach" />
                 <ScalarProperty Name="id_sotrud" ColumnName="id_sotrud" />
                 <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="me" ColumnName="me" />
-                <ScalarProperty Name="manager" ColumnName="manager" />
-                <ScalarProperty Name="sum" ColumnName="sum" />
-              </MappingFragment>
+                </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="resume">

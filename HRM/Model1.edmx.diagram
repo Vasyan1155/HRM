@@ -7,7 +7,7 @@
       <Diagram DiagramId="ed5931a4efa849b2a40dd509a96b746d" Name="Diagram1" ZoomLevel="142">
         <EntityTypeShape EntityType="user222_dbModel.employees" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="user222_dbModel.Kompania" Width="1.5" PointX="3" PointY="1.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="user222_dbModel.rating" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="user222_dbModel.rating" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
         <EntityTypeShape EntityType="user222_dbModel.resume" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
         <EntityTypeShape EntityType="user222_dbModel.Role" Width="1.5" PointX="3" PointY="11.875" IsExpanded="true" />
         <EntityTypeShape EntityType="user222_dbModel.task" Width="1.5" PointX="3" PointY="14.375" IsExpanded="true" />

@@ -70,13 +70,22 @@
     <Compile Include="Accaunt.xaml.cs">
       <DependentUpon>Accaunt.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AddEmployeeWindow.xaml.cs">
+      <DependentUpon>AddEmployeeWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CreateCompanyWindow.xaml.cs">
       <DependentUpon>CreateCompanyWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CreateTaskWindow.xaml.cs">
+      <DependentUpon>CreateTaskWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="CreateVacancyWindow.xaml.cs">
       <DependentUpon>CreateVacancyWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="datas.cs" />
+    <Compile Include="DismissEmployeeWindow.xaml.cs">
+      <DependentUpon>DismissEmployeeWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="employees.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -124,11 +133,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="AddEmployeeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CreateCompanyWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="CreateTaskWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CreateVacancyWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DismissEmployeeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
